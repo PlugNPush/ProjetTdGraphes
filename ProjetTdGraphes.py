@@ -5,6 +5,9 @@
 
 
 # Fichier importés #
+from re import M
+
+
 File_txt = 'Test1.txt'
 
 # Les couleurs #
@@ -34,15 +37,12 @@ def lecture_fichier():
     for line in FILE:
         i+=1
         if len(line) < 2: # il y a au moins 2 éléments
-            print("\nErreur de type sommet/durée\n")
-            break
+            raise Exception("\nErreur de type sommet/durée\n")
         if int(line[0]) != i: # les sommets commencent à 1 et sont dans l'ordre (à réfléchir)
-            print("\nErreur de type ordre des sommets\n")
-            break
+            raise Exception("\nErreur de type ordre des sommets\n")
         for element in line:
             if int(element) < 0: # tout les éléments sont positifs
-                print("\nErreur de type négatif\n")
-                break
+                raise Exception("\nErreur de type négatif\n")
 
 # Graphe d'ordonnancement #
 def ordonnancement():
@@ -52,12 +52,12 @@ def ordonnancement():
         print(str(nb_sommets)+" sommets")
 
         #recherche des arcs de fâçon ordonnée
-        i_début=0
+        i_debut=0
         liste_fin=[]
         for line in FILE:
             if len(line)==2: # pas de prédecesseur
-                FILE_Ord.insert(i_début,[0,int(line[0]),0]) # 0->sommet=durée
-                i_début+=1
+                FILE_Ord.insert(i_debut,[0,int(line[0]),0]) # 0->sommet=durée
+                i_debut+=1
             else:
                 for i_element in range(len(line)-2): # on s'occupe de chaque prédecesseurs
                     if line[i_element+2] not in liste_fin: # on cherche tous les prédecesseurs pour trouver plus tard tous ceux sans successeurs 
@@ -65,7 +65,8 @@ def ordonnancement():
                     for line_pred in FILE: # on cherche la durée du prédecesseur
                         if line_pred[0] == line[i_element+2]:
                             pred_duree=int(line_pred[1])
-                            #exit?
+                            break
+                    ### simplification possible print(pred_duree, line[int(line[i_element+2])][1])        
                     FILE_Ord.append([int(line[i_element+2]),int(line[0]),pred_duree]) #pred->sommet=pred_durée
         #print(liste_fin)
         for line in FILE: # on recherche les sommets sans successeurs pour leur ajouter w
@@ -102,12 +103,46 @@ def adjacence_valeurs():
 
     return MA,MV
 
+# Detection de circuit (par suppression des points d'entrées) #
+def detection_circuit():
+    entry = [0]
+    entryed = []
+    MA_circuit=MA
+    no_circuit=True
+    while entry and no_circuit :
+        for i in range(len(MA_circuit[entry[0]])): # on enlève les arcs de l'entrée
+            if MA_circuit[entry[0]][i]==1:
+                #print(i)
+                MA_circuit[entry[0]][i]=0
+                if i not in entry:
+                    entry.append(i) # on ajoute les successeurs des arcs enlevés aux entrées
+                if i in entryed:
+                    no_circuit=False #circuit
+        #for i in range(len(MA_circuit)): # on enlève la colonne de l'entrée
+        #    del(MA_circuit[i][entry[0]])
+        entryed.append(entry[0]) # entrée faite
+        del(entry[0])
+        #print("mes entrees",entry,entryed)
+        #for i in range(len(MA_circuit)):
+            #print(MA_circuit[i])
+    return no_circuit
+
+# Calcul des rangs #
+def rang():
+    entry=[0]
+    while entry:
+        for i in FILE_Ord:
+            print("yes")
+
+        del(entry[0])
 
 ## Main ##
 
 # Initialisation #
 nb_sommets=-1
 nb_arcs=-1
+#taille_max=
+no_circuit=True
 MA=[] # tableau de int
 MV=[] # tableau de str
 
@@ -119,3 +154,7 @@ print(FILE_Ord)
 MA,MV=adjacence_valeurs()
 print(MA)
 print(MV)
+no_circuit=detection_circuit()
+print("pas de circuit :",no_circuit)
+if no_circuit:
+    rang()

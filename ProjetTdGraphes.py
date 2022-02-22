@@ -17,8 +17,8 @@ P='\33[35m' #purple
 C='\33[36m' #cyan
 
 # Variable général #
-FILE=[]
-FILE_Ord=[]
+FILE=[] # liste de str
+FILE_Ord=[] # liste de int
 
 # Lecture de fichier #
 def lecture_fichier():
@@ -49,7 +49,7 @@ def ordonnancement():
     with open("Ord1.txt","w") as Ord1:
         nb_sommets=len(FILE)+2
         Ord1.write(str(nb_sommets)+" sommets\n")
-        print(G+ str(nb_sommets)+ "sommets\n" +W)
+        print(str(nb_sommets)+" sommets")
 
         #recherche des arcs de fâçon ordonnée
         i_début=0
@@ -68,17 +68,54 @@ def ordonnancement():
                             #exit?
                     FILE_Ord.append([int(line[i_element+2]),int(line[0]),pred_duree]) #pred->sommet=pred_durée
         #print(liste_fin)
-        for line in FILE:
+        for line in FILE: # on recherche les sommets sans successeurs pour leur ajouter w
             if line[0] not in liste_fin:
                 FILE_Ord.append([int(line[0]),nb_sommets-1,int(line[1])]) #sommet->fin=sommet_durée
+        
+        nb_arcs=len(FILE_Ord)
+        Ord1.write(str(nb_arcs)+" arcs\n")
+        print(str(nb_arcs)+" arcs")
+        for arc in FILE_Ord:
+            Ord1.write(str(arc[0])+" -> "+str(arc[1])+" = "+str(arc[2])+"\n")
+        
+        return nb_sommets,nb_arcs
 
+# Matrices d'adjacence et de valeurs #
+def adjacence_valeurs():
+    MA = [[0 for x in range(nb_sommets)] for i in range(nb_sommets)]
+    MV = [['*' for x in range(nb_sommets)] for i in range(nb_sommets)]
+    for arc in FILE_Ord:
+        MA[arc[0]][arc[1]]=1
+        MV[arc[0]][arc[1]]=str(arc[2])
+
+    #write MA et MV
+    with open("MA1.txt","w") as MA1:
+        for line in MA:
+            for element in line:
+                MA1.write(str(element)+' ')
+            MA1.write('\n')
+    with open("MV1.txt","w") as MV1:
+        for line in MV:
+            for element in line:
+                MV1.write(element+' ')
+            MV1.write('\n')
+
+    return MA,MV
 
 
 ## Main ##
 
 # Initialisation #
+nb_sommets=-1
+nb_arcs=-1
+MA=[] # tableau de int
+MV=[] # tableau de str
 
+# Corps #
 lecture_fichier()
 print(FILE)
-ordonnancement()
+nb_sommets,nb_arcs=ordonnancement()
 print(FILE_Ord)
+MA,MV=adjacence_valeurs()
+print(MA)
+print(MV)

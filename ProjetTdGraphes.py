@@ -5,9 +5,6 @@
 
 
 # Fichier importés #
-from re import M
-
-
 File_txt = 'Test1.txt'
 
 # Les couleurs #
@@ -129,19 +126,34 @@ def detection_circuit():
 
 # Calcul des rangs #
 def rang():
-    entry=[0]
+    entry=[0] # mes entrées
+    entryed=[] # mes anciennes entrées
+    nb_rang=0 # le rang actuel
+    rangs=[[entry[0],nb_rang]] # liste des rangs [sommet,rang]
     while entry:
-        for i in FILE_Ord:
-            print("yes")
-
+        nb_rang+=1
+        for i in FILE_Ord: # recherche des successeurs i[1]
+            if i[0]==entry[0] and i[1] not in entryed:
+                pred=0
+                for index,j in enumerate(FILE_Ord): # recherche des prédécesseurs pour chaque succésseurs
+                    if j[1] == i[1] and j[0] not in entryed and (j[0] not in entry[0:index]): # on cherche le nombre de predecesseur de i[1]
+                        pred+=1
+                        #print("pred=",j)
+                #print(i,pred)
+                if pred<=1 and i[1] not in entry:
+                    entry.append(i[1]) # 0->1=2
+                    rangs.append([i[1],nb_rang])
+        entryed.append(entry[0])
         del(entry[0])
+        #print("les entrees:",entry, entryed,"le fichier: ", FILE_Ord,"les rangs: ", rangs)
+    print("les rangs: ",rangs)
 
 ## Main ##
 
 # Initialisation #
 nb_sommets=-1
 nb_arcs=-1
-#taille_max=
+#taille_max=99
 no_circuit=True
 MA=[] # tableau de int
 MV=[] # tableau de str

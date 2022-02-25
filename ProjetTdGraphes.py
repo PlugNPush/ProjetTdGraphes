@@ -4,22 +4,6 @@
 # Bibliothéques #
 
 
-# Fichier importés #
-File_txt = 'Test1.txt'
-
-# Les couleurs #
-W='\33[0m' #white
-R='\33[31m' #red
-G='\33[32m' #green
-Y='\33[33m' #yellow
-B='\33[34m' #blue
-P='\33[35m' #purple
-C='\33[36m' #cyan
-
-# Variable général #
-FILE=[] # liste de str
-FILE_Ord=[] # liste de int
-
 # Lecture de fichier #
 def lecture_fichier():
     file = open(File_txt,"r") # ouverture du fichier en lecture seule
@@ -195,29 +179,61 @@ def critique():
             chemin_crit.append(sommets_par_rangs[index])
     print("le chemin critique est",chemin_crit)
 
+
 ## Main ##
 
-# Initialisation #
-nb_sommets=-1
-nb_arcs=-1
-#taille_max=99
-no_circuit=True
-MA=[] # tableau de int
-MV=[] # tableau de str
+# Les couleurs #
+W='\33[0m' #white
+R='\33[31m' #red
+G='\33[32m' #green
+Y='\33[33m' #yellow
+B='\33[34m' #blue
+P='\33[35m' #purple
+C='\33[36m' #cyan
 
-# Corps #
-lecture_fichier()
-print(FILE)
-nb_sommets,nb_arcs=ordonnancement()
-print("ordonancement",FILE_Ord)
-MA,MV=adjacence_valeurs()
-print("MA",MA)
-print("MV",MV)
-no_circuit=detection_circuit()
-print("pas de circuit:",no_circuit)
-if no_circuit:
-    rangs=rang()
-    print("les rangs:",rangs)
-    dates_tot,dates_tard,marge=dates()
-    print("dates au plus tot, au plus tard et marge:",dates_tot,dates_tard,marge)
-    critique()
+print("Bonjour !")
+start=True
+while start:
+    num_file=0
+    while num_file<1 or num_file>1:
+        num_file=int(input("Choisissez le numero de l'exercice (entre 1 et 1): "))
+
+    # Fichier importés #
+    File_txt = 'Test{}.txt'.format(num_file)
+
+    # Initialisation #
+    FILE=[] # liste de str
+    FILE_Ord=[] # liste de int
+    nb_sommets=-1
+    nb_arcs=-1
+    #taille_max=99
+    no_circuit=True
+    MA=[] # tableau de int
+    MV=[] # tableau de str
+
+    # Corps #
+    lecture_fichier()
+    print(FILE)
+    nb_sommets,nb_arcs=ordonnancement()
+    print("ordonancement",FILE_Ord)
+    MA,MV=adjacence_valeurs()
+    print("MA",MA)
+    print("MV",MV)
+    no_circuit=detection_circuit()
+    print("pas de circuit:",no_circuit)
+    if no_circuit:
+        rangs=rang()
+        print("les rangs:",rangs)
+        dates_tot,dates_tard,marge=dates()
+        print("dates au plus tot, au plus tard et marge:",dates_tot,dates_tard,marge)
+        critique()
+    else:
+        print("Nous ne pouvons continuez les calculs du fait de la présence d'un circuit.")
+
+    continuation=""
+    while continuation!="Y" and continuation!="N":
+        continuation=input("Voulez-vous continuer et choisir un autre graphe ? (Y ou N): ")
+        print(continuation)
+    if continuation=="N": #STOP
+        print("Au revoir !")
+        start=False

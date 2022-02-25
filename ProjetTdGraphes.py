@@ -129,7 +129,7 @@ def rang():
     entry=[0] # mes entrées
     entryed=[] # mes anciennes entrées
     nb_rang=0 # le rang actuel
-    rangs=[[entry[0],nb_rang]] # liste des rangs [sommet,rang]
+    rangs={nb_rang:[entry[0]]} # dico des rangs {rang:[sommets]}
     while entry:
         nb_rang+=1
         for i in FILE_Ord: # recherche des successeurs i[1]
@@ -142,11 +142,58 @@ def rang():
                 #print(i,pred)
                 if pred<=1 and i[1] not in entry:
                     entry.append(i[1]) # 0->1=2
-                    rangs.append([i[1],nb_rang])
+                    if nb_rang in rangs:
+                        (rangs[nb_rang]).append(i[1]) # ajout
+                    else:
+                        rangs[nb_rang]=[i[1]] # nouvelle entrée
         entryed.append(entry[0])
         del(entry[0])
         #print("les entrees:",entry, entryed,"le fichier: ", FILE_Ord,"les rangs: ", rangs)
-    print("les rangs: ",rangs)
+    return rangs
+
+def dates():
+    dates_tot=[0]*nb_sommets
+    for rang in rangs: # on fait dans l'ordre des rangs
+        if rang != 0:
+            for sommet in rangs[rang]:
+                #print(rang,sommet, dates_tot)
+                # on cherche tous ses prédecesseurs parmis dates_tot et ajoute leur temps puis on les compare
+                for pred in FILE_Ord:
+                    if pred[1] == sommet:
+                        dates_tot[sommet]=max(dates_tot[pred[0]]+pred[2],dates_tot[sommet])
+    #print(dates_tot)
+    
+    dates_tard=[dates_tot[-1]]*nb_sommets
+    for i_rang in range(len(rangs)): # on fait dans l'ordre inverse des rangs
+        rang=len(rangs)-1-i_rang
+        if rangs[rang] != rangs[len(rangs)-1]: #diff du dernier rang
+            for i_sommet in range(len(rangs[rang])):
+                sommet=len(rangs[rang])-1-i_sommet
+                # on cherche tous ses succésseurs parmis dates_tard et enlève leur temps puis on les compare
+                #print(rang,sommet,dates_tard)
+                for i_suc in range(len(FILE_Ord)):
+                    suc=len(FILE_Ord)-1-i_suc
+                    if FILE_Ord[suc][0] == rangs[rang][sommet]:
+                        dates_tard[FILE_Ord[suc][0]]=min(dates_tard[FILE_Ord[suc][1]]-FILE_Ord[suc][2],dates_tard[FILE_Ord[suc][0]])
+    #print(dates_tard)
+
+    marge=[b - a for a, b in zip(dates_tot, dates_tard)]
+    #print(marge)
+
+    return dates_tot,dates_tard,marge
+
+def critique():
+    chemin_crit=[]
+    sommets_par_rangs=[]
+    for rang in rangs:
+        for sommet in rangs[rang]:
+            sommets_par_rangs.append(sommet)
+    print(sommets_par_rangs)
+
+    for index,element in enumerate(marge):
+        if element==0:
+            chemin_crit.append(sommets_par_rangs[index])
+    print("le chemin critique est",chemin_crit)
 
 ## Main ##
 
@@ -162,11 +209,15 @@ MV=[] # tableau de str
 lecture_fichier()
 print(FILE)
 nb_sommets,nb_arcs=ordonnancement()
-print(FILE_Ord)
+print("ordonancement",FILE_Ord)
 MA,MV=adjacence_valeurs()
-print(MA)
-print(MV)
+print("MA",MA)
+print("MV",MV)
 no_circuit=detection_circuit()
-print("pas de circuit :",no_circuit)
+print("pas de circuit:",no_circuit)
 if no_circuit:
-    rang()
+    rangs=rang()
+    print("les rangs:",rangs)
+    dates_tot,dates_tard,marge=dates()
+    print("dates au plus tot, au plus tard et marge:",dates_tot,dates_tard,marge)
+    critique()

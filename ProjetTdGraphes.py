@@ -27,7 +27,7 @@ def lecture_fichier() :
 
 # Graphe d'ordonnancement #
 def ordonnancement() :
-    with open("Ord1.txt","w") as Ord1 :
+    with open("Test{}".format(num_file) + '\Ord{}.txt'.format(num_file),"w") as Ord1 :
         nb_sommets = len(FILE) + 2
         Ord1.write(str(nb_sommets) + " sommets\n")
         print(str(nb_sommets) + " sommets")
@@ -71,12 +71,12 @@ def adjacence_valeurs() :
         MV[arc[0]][arc[1]] = str(arc[2])
 
     #write MA et MV
-    with open("MA1.txt","w") as MA1 :
+    with open("Test{}".format(num_file) + '\MA{}.txt'.format(num_file),"w") as MA1 :
         for line in MA :
             for element in line :
                 MA1.write(str(element) + ' ')
             MA1.write('\n')
-    with open("MV1.txt","w") as MV1 :
+    with open("Test{}".format(num_file) + '\MV{}.txt'.format(num_file),"w") as MV1 :
         for line in MV :
             for element in line :
                 MV1.write(element + ' ')
@@ -87,6 +87,7 @@ def adjacence_valeurs() :
 # Detection de circuit (par suppression des points d'entrées) #
 def detection_circuit() :
     entry = [0]
+    nb_no_entry=0
     entryed = []
     MA_circuit = MA
     no_circuit = True
@@ -97,11 +98,25 @@ def detection_circuit() :
                 MA_circuit[entry[0]][i] = 0
                 if i not in entry :
                     entry.append(i) # on ajoute les successeurs des arcs enlevés aux entrées
-                if i in entryed :
+                if i in entryed :        
+                    print("circuit :",i)
                     no_circuit = False #circuit
+            else :
+                nb_no_entry+=1
         #for i in range(len(MA_circuit)): # on enlève la colonne de l'entrée
         #    del(MA_circuit[i][entry[0]])
-        entryed.append(entry[0]) # entrée faite
+        if nb_no_entry==nb_sommets:
+            print("aucune entrée(s)")
+            no_circuit=False
+        """
+        pred_i = [pred_i[0] for pred_i in FILE_Ord if pred_i[1]==entry[0]] # recherche des pred de entry[0]
+        #print(pred_i)
+        #print(set(pred_i)&set(entryed))
+        if len(set(pred_i)&set(entryed))==len(pred_i): # ses pred sont tous dans entryed
+            entryed.append(entry[0]) # entrée faite (s'il n'y a plus de pred)
+        else:
+            entry.append(entry[0]) # on reboucle à la fin
+        """
         del(entry[0])
         #print("mes entrees",entry,entryed)
         #for i in range(len(MA_circuit)):
@@ -172,7 +187,7 @@ def critique() :
     for rang in rangs :
         for sommet in rangs[rang] :
             sommets_par_rangs.append(sommet)
-    print(sommets_par_rangs)
+    print("ordre des sommets celon le rang ",sommets_par_rangs)
 
     for index,element in enumerate(marge) :
         if element == 0 :
@@ -195,11 +210,11 @@ print("Bonjour !")
 start = True
 while start :
     num_file = 0
-    while num_file < 1 or num_file > 1 :
-        num_file = int(input("Choisissez le numero de l'exercice (entre 1 et 1): "))
+    while num_file < 1 or num_file > 10 :
+        num_file = int(input("Choisissez le numero de l'exercice (entre 1 et 10): "))
 
     # Fichier importés #
-    File_txt = 'Test{}.txt'.format(num_file)
+    File_txt = 'Test{}'.format(num_file) + '\Test{}.txt'.format(num_file)
 
     # Initialisation #
     FILE = [] # liste de str
@@ -232,8 +247,8 @@ while start :
 
     continuation = ""
     while continuation != "Y" and continuation != "N" :
-        continuation = input("Voulez-vous continuer et choisir un autre graphe ? (Y ou N): ")
+        continuation = input("\nVoulez-vous continuer et choisir un autre graphe ? (Y ou N): ")
         print(continuation)
     if continuation == "N" : #STOP
-        print("Au revoir !")
+        print("Au revoir !\n")
         start = False

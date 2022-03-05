@@ -1,0 +1,3 @@
+3 sommets
+1 arcs
+1 -> 1 = 1

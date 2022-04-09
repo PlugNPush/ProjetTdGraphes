@@ -41,8 +41,8 @@ print("Bonjour !")
 start = True
 while start :
 
-    while Gv.num_file < 1 or Gv.num_file > 12 :
-        Gv.num_file = int(input("Choisissez le numero de l'exercice (entre 1 et 12): "))
+    while Gv.num_file < 1 or Gv.num_file > 10 :
+        Gv.num_file = int(input("Choisissez le numero de l'exercice (entre 1 et 10): "))
 
     # Fichier importés #
     Gv.File_txt = 'tables/table {}'.format(Gv.num_file) + '/table {}.txt'.format(Gv.num_file)

@@ -56,5 +56,5 @@
 
 ----- DETECTION CIRCUIT -----
 circuit :4[0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0]
-Statut de circuit:False
+Statut de circuit:True
 

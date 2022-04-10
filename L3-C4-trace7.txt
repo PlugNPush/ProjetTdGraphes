@@ -54,5 +54,6 @@ le chemin critique est[0, 1, 4, 5, 6, 8, 9, 10, 11]
 
 ----- CALCUL DES RANGS -----
 les rangs:{0: [0], 1: [4, 6, 7], 2: [2, 3, 5, 10], 3: [1, 8], 4: [9], 5: [11]}
+
 ----- CALCUL DES DATES -----
 dates au plus tot, au plus tard et marge:[0, 16, 7, 6, 0, 4, 0, 0, 9, 17, 6, 26][0, 16, 24, 14, 0, 4, 0, 2, 9, 17, 6, 26][0, 0, 17, 8, 0, 0, 0, 2, 0, 0, 0, 0]

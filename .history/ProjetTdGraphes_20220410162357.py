@@ -26,7 +26,7 @@ def main():
     print("MA",Gv.MA)
     print("MV",Gv.MV)
     Gv.no_circuit=detection_circuit()
-    print("statut de circuit:", not Gv.no_circuit)
+    print("pas de circuit:",Gv.no_circuit)
     if Gv.no_circuit :
         Gv.rangs = rang()
         print("les rangs:",Gv.rangs)
@@ -53,6 +53,6 @@ while start :
         continuation = input("\nVoulez-vous continuer et choisir un autre graphe ? (y ou n): ")
         print(continuation)
         Gv.reset()
-    if continuation == "n" : #STOP
+    if continuation == "N" : #STOP
         print("Au revoir !\n")
         start = False

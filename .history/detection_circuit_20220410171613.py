@@ -8,28 +8,21 @@ def detection_circuit() :
     entryed = []
     MA_circuit = Gv.MA
     no_circuit = True
-    warning = 0
     print(MA_circuit)
     while entry and no_circuit : # tant qu'on a pas finis de se déplacer sur le graphe ou que l'on a pas détecté un circuit
         nb_pred=0
         for i in range(len(MA_circuit[entry[0]])): # test des pred
             if MA_circuit[i][entry[0]]==1: # un pred (i) !
                 nb_pred+=1
-        #print(nb_pred, entry, entryed)
+        print(nb_pred, entry, entryed)
         if nb_pred>0:# on ajoute notre élément à la fin de la liste
-            if sorted(nb_repeat) == sorted(entry):
-                if warning == len(nb_repeat):
-                    print(sorted(nb_repeat), sorted(entry))
-                    print("circuit :",entry[0],MA_circuit[entry[0]])
-                    no_circuit=False
-                warning += 1
             entry.append(entry[0])
             if entry[0] not in nb_repeat:
                 nb_repeat.append(entry[0])
         else: # on applique
             for i in range(len(MA_circuit[entry[0]])) : 
                 if MA_circuit[entry[0]][i] == 1 : # un suc (i) !
-                    #print(i)
+                    print(i)
                     MA_circuit[entry[0]][i] = 0 # on enlève les arcs de l'entrée
                     if i not in entry :
                         entry.append(i) # on ajoute les successeurs des arcs enlevés aux entrées
@@ -39,9 +32,13 @@ def detection_circuit() :
             entryed.append(entry[0])
             if entry[0] in nb_repeat:
                 nb_repeat.remove(entry[0])
-            #print("entryed", entryed,entry[0])
-            warning = 0
+            print("entryed", entryed,entry[0])
         del(entry[0]) # on a finis avec ce sommet
+         
+        if sorted(nb_repeat) == sorted(entry):
+            print(sorted(nb_repeat), sorted(entry))
+            print("circuit :",entry[0],MA_circuit[entry[0]])
+            no_circuit=False
 
     """
     while entry and no_circuit :

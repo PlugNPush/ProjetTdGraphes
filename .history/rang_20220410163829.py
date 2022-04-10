@@ -9,7 +9,7 @@ def rang() :
         succ = []
 
         for i in Gv.FILE_Ord : # Pour toutes les entrées
-            if i[0] in entry and i[1] not in succ: # on recherche tous les successeurs de nos entrées
+            if i[0] in entry and i[0] not in succ: # on recherche tous les successeurs de nos entrées
                 succ.append(i[1])
         
         if succ:
@@ -18,8 +18,10 @@ def rang() :
 
             for i in range(0, nb_rang):
                 for e in succ:
+                    print("MATCHING ", e, " AGAINST ", rangs[i])
                     if e in rangs[i]:
-                        rangs[i] = list(filter(lambda a: a != e, rangs[i])) # On enlève toutes les occurences des nouveaux successeurs dans les rangs inférieurs
+                        print("REMOVING ", e, " FROM ", rangs[i])
+                        rangs[i] = list(filter(lambda a: a != e, rangs[i]))
         
         entry = succ
     return rangs

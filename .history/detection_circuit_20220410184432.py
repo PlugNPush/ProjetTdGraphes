@@ -22,7 +22,7 @@ def detection_circuit() :
                 if sorted(nb_repeat) == sorted(entry):
                     if warning == len(nb_repeat):
                         print("circuit :",entry[0],MA_circuit[entry[0]])
-                        Trace.write("circuit :" + str(entry[0]) + str(MA_circuit[entry[0]]) + "\n")
+                        Trace.write("circuit :",entry[0],MA_circuit[entry[0]], "\n")
                         no_circuit=False
                     warning += 1
                 entry.append(entry[0])
@@ -37,7 +37,6 @@ def detection_circuit() :
                             entry.append(i) # on ajoute les successeurs des arcs enlevés aux entrées
                         if i in entryed :
                             print("circuit :",i,MA_circuit[entry[0]],MA_circuit[i])
-                            Trace.write("circuit :" + str(i) + str(MA_circuit[entry[0]]) + str(MA_circuit[i]) + "\n")
                             no_circuit = False #circuit
                 entryed.append(entry[0])
                 if entry[0] in nb_repeat:
@@ -45,7 +44,6 @@ def detection_circuit() :
                 #print("entryed", entryed,entry[0])
                 warning = 0
             del(entry[0]) # on a finis avec ce sommet
-        
-        Trace.write("Statut de circuit:" + str(not Gv.no_circuit) + "\n")
+
         Trace.write("\n")
         return no_circuit

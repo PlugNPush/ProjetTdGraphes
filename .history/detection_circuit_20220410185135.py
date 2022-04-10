@@ -46,6 +46,6 @@ def detection_circuit() :
                 warning = 0
             del(entry[0]) # on a finis avec ce sommet
         
-        Trace.write("Statut de circuit:" + str(not Gv.no_circuit) + "\n")
+        Trace.write("Statut de circuit:", not Gv.no_circuit, "\n")
         Trace.write("\n")
         return no_circuit

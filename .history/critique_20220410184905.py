@@ -8,5 +8,4 @@ def critique() :
             if element == 0 :
                 chemin_crit.append(index)
         print("le chemin critique est",chemin_crit)
-        Trace.write("le chemin critique est" + str(chemin_crit) + "\n")
-        Trace.write("\n")
+        Trace.write("le chemin critique est",chemin_crit, "\n")

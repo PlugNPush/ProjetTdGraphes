@@ -3,7 +3,6 @@ import Globalvars as Gv
 # Graphe d'ordonnancement #
 def ordonnancement() :
     with open("L3-C4-trace{}.txt".format(Gv.num_file),"w") as Trace:
-        Trace.write('----- Ordonnancement -----\n')
         nb_sommets = len(Gv.FILE) + 2
         Trace.write(str(nb_sommets) + " sommets\n")
         print(str(nb_sommets) + " sommets")
@@ -36,5 +35,4 @@ def ordonnancement() :
         for arc in Gv.FILE_Ord :
             Trace.write(str(arc[0]) + " -> " + str(arc[1]) + " = " + str(arc[2]) + "\n")
         
-        Trace.write('\n')
         return nb_sommets,nb_arcs

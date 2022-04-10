@@ -9,7 +9,7 @@ def adjacence_valeurs() :
         MV[arc[0]][arc[1]] = str(arc[2])
 
     #write MA et MV
-    with open("L3-C4-trace{}.txt".format(Gv.num_file),"a") as Trace :
+    with open("L3-C4-trace{}.txt".format(Gv.num_file),"w") as Trace :
         Trace.write('----- Matrice Adjacence MA -----\n')
         for line in MA :
             for element in line :
@@ -23,5 +23,5 @@ def adjacence_valeurs() :
                 Trace.write(element + ' ')
             Trace.write('\n')
         Trace.write('\n')
-
+        
     return MA,MV

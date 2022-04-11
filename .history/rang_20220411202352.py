@@ -23,8 +23,4 @@ def rang() :
                             rangs[i] = list(filter(lambda a: a != e, rangs[i])) # On enlève toutes les occurences des nouveaux successeurs dans les rangs inférieurs
             
             entry = succ
-
-        Trace.write("----- CALCUL DES RANGS -----\n")
-        Trace.write("Les rangs sont : " + str(rangs) + "\n")
-        Trace.write("\n")
         return rangs

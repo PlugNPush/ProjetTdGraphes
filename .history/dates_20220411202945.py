@@ -31,6 +31,6 @@ def dates() :
         #print(marge)
         
         Trace.write("----- CALCUL DES DATES -----\n")
-        Trace.write("Dates au plus tot  : " + str(["{0:0=2d}".format(v) for v in dates_tot]) + "\nDates au plus tard : " + str(["{0:0=2d}".format(v) for v in dates_tard]) + "\nMarge              : " + str(["{0:0=2d}".format(v) for v in marge]) + "\n")
+        Trace.write("Dates au plus tot  : " + str(dates_tot) + "\nDates au plus tard : " + str(dates_tard) + "\nMarge              : " + str(marge) + "\n")
         Trace.write("\n")
         return dates_tot,dates_tard,marge

@@ -33,6 +33,7 @@ def main():
         
         print("les rangs:", Gv.rangs)
         
+        
         Gv.dates_tot,Gv.dates_tard,Gv.marge=dates()
         print("dates au plus tot, au plus tard et marge:",Gv.dates_tot,Gv.dates_tard,Gv.marge, "\n")
         critique()

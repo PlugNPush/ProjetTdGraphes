@@ -20,10 +20,7 @@ def adjacence_valeurs() :
         Trace.write('----- Matrice Valeurs MV -----\n')
         for line in MV :
             for element in line :
-                if element == "*":
-                    Trace.write(str(element) * 2 + ' ')
-                else:
-                    Trace.write(str(element).zfill(2) + ' ')
+                Trace.write(str(element).zfill(2) + ' ')
             Trace.write('\n')
         Trace.write('\n')
 

@@ -30,13 +30,16 @@ def main():
     if Gv.no_circuit :
 
         Gv.rangs = rang()
-        
+        Trace.write("----- CALCUL DES RANGS -----\n")
         print("les rangs:", Gv.rangs)
-        
+        Trace.write("les rangs:" + str(Gv.rangs) + "\n")
+        Trace.write("\n")
+        Trace.write("----- CALCUL DES DATES -----\n")
         Gv.dates_tot,Gv.dates_tard,Gv.marge=dates()
         print("dates au plus tot, au plus tard et marge:",Gv.dates_tot,Gv.dates_tard,Gv.marge, "\n")
+        Trace.write("dates au plus tot, au plus tard et marge:" + str(Gv.dates_tot) + str(Gv.dates_tard) + str(Gv.marge) + "\n")
         critique()
-
+        
     else :
         print("Nous ne pouvons continuez les calculs du fait de la présence d'un circuit.")
 

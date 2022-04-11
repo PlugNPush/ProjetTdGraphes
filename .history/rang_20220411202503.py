@@ -25,6 +25,6 @@ def rang() :
             entry = succ
 
         Trace.write("----- CALCUL DES RANGS -----\n")
-        Trace.write("Les rangs sont : " + str(rangs) + "\n")
+        Trace.write("Les rangs : " + str(Gv.rangs) + "\n")
         Trace.write("\n")
         return rangs

@@ -43,13 +43,16 @@
 * * * * * * * * * * 
 
 ----- DETECTION CIRCUIT -----
-Statut de circuit:False
-
------ CHEMIN CRITIQUE -----
-le chemin critique est[0, 1, 2, 3, 4, 5, 7, 8, 9]
+Statut de circuit : False
 
 ----- CALCUL DES RANGS -----
-les rangs:{0: [0], 1: [1], 2: [5], 3: [4], 4: [2, 6], 5: [3], 6: [7], 7: [8], 8: [9]}
+Les rangs sont : {0: [0], 1: [1], 2: [5], 3: [4], 4: [2, 6], 5: [3], 6: [7], 7: [8], 8: [9]}
 
 ----- CALCUL DES DATES -----
-dates au plus tot, au plus tard et marge:[0, 0, 8, 9, 6, 1, 8, 13, 16, 16][0, 0, 8, 9, 6, 1, 10, 13, 16, 16][0, 0, 0, 0, 0, 0, 2, 0, 0, 0]
+Dates au plus tot  : [0, 0, 8, 9, 6, 1, 8, 13, 16, 16]
+Dates au plus tard : [0, 0, 8, 9, 6, 1, 10, 13, 16, 16]
+Marge              : [0, 0, 0, 0, 0, 0, 2, 0, 0, 0]
+
+----- CHEMIN CRITIQUE -----
+Le chemin critique est : [0, 1, 2, 3, 4, 5, 7, 8, 9]
+

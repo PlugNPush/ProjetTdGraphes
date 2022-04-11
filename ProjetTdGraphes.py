@@ -38,7 +38,7 @@ def main():
         critique()
 
     else :
-        print("Nous ne pouvons continuez les calculs du fait de la présence d'un circuit.")
+        print("Nous ne pouvons continuer les calculs du fait de la présence d'un circuit.")
 
 
 print("Bonjour !")

@@ -45,6 +45,7 @@ def init():
     global dates_tot
     global dates_tard
     global marge
+    global liste_rangs
 
 
 

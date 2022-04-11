@@ -21,8 +21,8 @@ def detection_circuit() :
             if nb_pred>0:# on ajoute notre élément à la fin de la liste
                 if sorted(nb_repeat) == sorted(entry):
                     if warning == len(nb_repeat):
-                        print("circuit :",entry[0],MA_circuit[entry[0]])
-                        Trace.write("circuit :" + str(entry[0]) + str(MA_circuit[entry[0]]) + "\n")
+                        print("circuit : ",nb_repeat)
+                        Trace.write("Circuit : " + str(nb_repeat) + "\n")
                         no_circuit=False
                     warning += 1
                 entry.append(entry[0])

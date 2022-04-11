@@ -6,7 +6,7 @@ def critique() :
         Trace.write("----- CHEMIN CRITIQUE -----\n")
         for index, element in enumerate(Gv.marge) :
             if element == 0 :
-                chemin_crit.append(index)
+                chemin_crit.append(Gv.liste_rangs[index])
         print("le chemin critique est",chemin_crit)
         Trace.write("Le chemin critique est : " + str(chemin_crit) + "\n")
         Trace.write("\n")

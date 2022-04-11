@@ -27,6 +27,20 @@ def dates() :
                             dates_tard[Gv.FILE_Ord[suc][0]] = min(dates_tard[Gv.FILE_Ord[suc][1]] - Gv.FILE_Ord[suc][2],dates_tard[Gv.FILE_Ord[suc][0]])
         #print(dates_tard)
 
+        Gv.liste_rangs=[]
+        for e in Gv.rangs:
+            for i in Gv.rangs[e] :
+                Gv.liste_rangs.append(i)
+        #print(liste_rangs)
+        dates_tot_save=[]
+        for i in Gv.liste_rangs:
+            dates_tot_save.append(dates_tot[i])
+        dates_tot=dates_tot_save
+        dates_tard_save=[]
+        for i in Gv.liste_rangs:
+            dates_tard_save.append(dates_tard[i])
+        dates_tard=dates_tard_save
+
         marge = [b - a for a, b in zip(dates_tot, dates_tard)]
         #print(marge)
         

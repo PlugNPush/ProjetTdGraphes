@@ -71,5 +71,6 @@ Dates au plus tard : ['00', '00', '00', '10', '10', '15', '33', '19', '19', '35'
 Marge              : ['00', '00', '00', '00', '00', '00', '18', '00', '00', '08', '00', '00', '00', '00']
 
 ----- CHEMIN CRITIQUE -----
-Le chemin critique est : [0, 1, 2, 3, 4, 5, 9, 6, 10, 11, 12, 13]
+Les sommets comportant le(s) chemin(s) critique(s) sont : [0, 1, 2, 3, 4, 5, 9, 6, 10, 11, 12, 13]
+Un chemin critique est : [0, 1, 3, 9, 10, 11, 13]
 

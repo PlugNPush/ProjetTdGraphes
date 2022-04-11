@@ -1,4 +1,5 @@
 import Globalvars as Gv
+import copy
 
 # Detection de circuit (par suppression des points d'entrées) #
 def detection_circuit() :
@@ -8,10 +9,10 @@ def detection_circuit() :
         #nb_no_entry=0
         nb_repeat = []
         entryed = []
-        MA_circuit = Gv.MA
+        MA_circuit = copy.deepcopy(Gv.MA)
         no_circuit = True
         warning = 0
-        print(MA_circuit)
+        #print(MA_circuit)
         while entry and no_circuit : # tant qu'on a pas finis de se déplacer sur le graphe ou que l'on a pas détecté un circuit
             nb_pred=0
             for i in range(len(MA_circuit[entry[0]])): # test des pred

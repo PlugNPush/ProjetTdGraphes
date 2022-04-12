@@ -60,8 +60,9 @@ Les rangs sont : {0: [0], 1: [4, 5, 6, 7, 10], 2: [1, 2, 3, 8], 3: [9], 4: [11]}
 Dates au plus tot  : ['00', '00', '00', '00', '00', '00', '10', '07', '10', '07', '16', '25']
 Dates au plus tard : ['00', '11', '02', '07', '00', '03', '15', '14', '13', '07', '16', '25']
 Marge              : ['00', '11', '02', '07', '00', '03', '05', '07', '03', '00', '00', '00']
+Poids total : 25
 
 ----- CHEMIN CRITIQUE -----
 Les sommets comportant le(s) chemin(s) critique(s) sont : [0, 7, 8, 9, 11]
-Un chemin critique est : [0, 7, 8, 9, 11]
+Le chemin critique est : [0, 7, 8, 9, 11]
 
